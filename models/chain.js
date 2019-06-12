@@ -4,6 +4,8 @@ var chain = new mongoose.Schema({
     data:{
         stage:String,
         name:String,
+        carat:String,
+        color:String,
         description:String,
     },
     pervioushash:String,
