@@ -11,7 +11,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json({extended:true}));
 
 //stages
-var stages=['Mine','Plaining','Laster Cutting','Polishing','Q.C','Certification','Distribution'];
+var stages=['Mine','Planing','Laster Cutting','Polishing','Quality Check','Certification','Distribution'];
 //date
 var currentDate = new Date();
 function myTimeStamp(){
@@ -132,6 +132,6 @@ app.post('/stageadd',(req,res)=>{
  });
 
  //listen
-app.listen(12345,()=>{
+app.listen(3000,()=>{
     console.log('node is up');
 });
