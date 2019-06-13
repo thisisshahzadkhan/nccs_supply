@@ -90,20 +90,20 @@ app.post('/stageupdate',(req,res)=>{
             function(err,dbres2){
                 if(err)console.log(err);
                 else{
-                     item.findOne({_id:req.body.id},function(err,dbres){
+                     item.findOne({_id:req.body.id},function(err,dbres3){
                          if(err)console.log(err);
                          else{
-                            chain.find({},function(err,res){
+                            chain.find({},function(err,dbres4){
                                 if(err) console.log(err);
                                 else{ 
                                      chain.create(new chain({
-                                         pervioushash:res[res.length-1]._id,
-                                         data:dbres,
+                                         pervioushash:dbres4[dbres4.length-1]._id,
+                                         data:dbres3,
                                          timestamp:myTimeStamp()
-                                     }),function(err,dbres){
+                                     }),function(err,dbres5){
                                          console.log(err);
-                                         console.log(dbres);
-                                         res.json({msg:dbres});
+                                         console.log(dbres5);
+                                         res.json({msg:dbres5});
                                      });
                                  }
                              });
