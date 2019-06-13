@@ -103,6 +103,7 @@ app.post('/stageupdate',(req,res)=>{
                                      }),function(err,dbres){
                                          console.log(err);
                                          console.log(dbres);
+                                         res.json({msg:dbres});
                                      });
                                  }
                              });
