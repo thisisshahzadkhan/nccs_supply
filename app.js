@@ -36,7 +36,7 @@ app.post('/getchain',(req,res)=>{
 
 //item addition
 app.post('/additem',(req,res)=>{
-   console.log(req.body.name);
+    //item.findOne({name:req.body.name})
     item.create(new item({
         name:req.body.name,
         currentstage:0,
@@ -45,18 +45,26 @@ app.post('/additem',(req,res)=>{
         color:req.body.color,
         description:req.body.description,
     }),function(err,dbres){
-        if(err){console.log(err);}
+        
+        if(err){console.log(err);
+        res.json({msg:err.errmsg});}
         else {
-            chain.find({},function(err,res){
-               if(err) console.log(err);
+            chain.find({},function(err,dbres2){
+                var hash;
+                if(dbres2.length===0)
+                {hash='genesis';}else{
+                    hash=dbres2[dbres2.length-1]._id;
+                }
+                if(err) console.log(err);
                else{ 
                     chain.create(new chain({
-                        pervioushash:res[res.length-1]._id,
+                        pervioushash:hash,
                         data:dbres,
                         timestamp:myTimeStamp()
-                    }),function(err,dbres){
+                    }),function(err,dbres3){
                         console.log(err);
-                        console.log(dbres);
+                        console.log(dbres3);
+                        res.json(dbres3);
                     });
                 }
             }); 
